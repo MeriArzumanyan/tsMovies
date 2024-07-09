@@ -1,0 +1,27 @@
+.movies{
+    width: 17%;
+    padding-bottom: 10px;
+    background-color: rgb(55, 53, 53);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    
+}
+.movies img{
+    width: 100%;
+    object-fit: cover;
+    height: 320px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-position: center;
+}
+h3{
+    padding-top: 40px;
+    overflow-y: hidden;
+}
+.title{
+height: 100px; 
+text-align: center;
+}

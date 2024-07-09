@@ -3,5 +3,15 @@
     align-items: center;
     justify-content: space-between;
     padding-top: 10px;
+    gap: 10px;
 
+}
+.btn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+img{
+    width: 10%;
 }

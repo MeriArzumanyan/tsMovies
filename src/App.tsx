@@ -1,19 +1,14 @@
 import Nav from "./Components/Nav/Nav";
 import "./App.css";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./store/forHooks";
-// import genresSlices from "./store/slices/genresSlices";
-import { fetchGenres } from "./store/slices/genresSlices";
+import Home from "./Pages/Home/Home";
+import { Routes, Route } from "react-router-dom";
 function App() {
-  const dispatch = useAppDispatch();
-  const { genres } = useAppSelector((state) => state.genresSlices);
-  useEffect(() => {
-    dispatch(fetchGenres());
-  }, []);
-
   return (
     <div className="container">
-      <Nav genres={genres}/>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
