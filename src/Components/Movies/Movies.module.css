@@ -21,6 +21,10 @@ h3{
     padding-top: 40px;
     overflow-y: hidden;
 }
+h3:hover{
+    text-decoration: underline #646cff;
+    cursor: pointer;
+}
 .title{
 height: 100px; 
 text-align: center;

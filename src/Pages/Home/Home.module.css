@@ -6,3 +6,18 @@
     gap: 20px;
     flex-wrap: wrap;
 }
+h3{
+    color: rgb(160, 159, 159);
+    text-decoration: none;
+}
+a:visited{
+    color: rgb(160, 159, 159);
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+}

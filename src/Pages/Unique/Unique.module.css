@@ -1,0 +1,35 @@
+.oneMoviePage {
+  padding-top: 60px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.movie {
+  width: 20%;
+  padding-bottom: 10px;
+  background-color: rgb(55, 53, 53);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.movie img {
+  width: 100%;
+  object-fit: cover;
+  height: 320px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-position: center;
+}
+
+h3:hover {
+  text-decoration: underline #646cff;
+  cursor: pointer;
+}
+.title {
+  height: 100px;
+  text-align: center;
+}
+.about{
+    width: 50%;
+}

@@ -22,13 +22,15 @@ export interface Typeofmovies {
   results: Typeofresults[];
   total_pages: number;
   total_results: number;
+  oneMovie: {};
 }
 export interface Typeofmoviesresult {
-    page: number;
-    movies: Typeofresults[];
-    total_pages: number;
-    total_results: number;
-  }
+  page: number;
+  movies: Typeofresults[];
+  total_pages: number;
+  total_results: number;
+  oneMovie: Typeofresults | null;
+}
 export const fetchMovies: any = createAsyncThunk<Typeofresults[]>(
   "fetchMovies",
   async () => {
@@ -36,20 +38,32 @@ export const fetchMovies: any = createAsyncThunk<Typeofresults[]>(
     return res.data.results;
   }
 );
+export const fetchMovie: any = createAsyncThunk(
+  "fetchMovie",
+  async (id: string) => {
+    const res: AxiosResponse<Typeofresults> = await MovieAPI.getOneMovie(id);
+    return res.data;
+  }
+);
 
-const initialState:Typeofmoviesresult = {
+const initialState: Typeofmoviesresult = {
   movies: [],
   page: 1,
-  total_pages: 44976,
-  total_results: 899512,
+  total_pages: 0,
+  total_results: 0,
+  oneMovie: null,
 };
 const moviesSlices = createSlice({
   name: "moviesSlices",
   initialState,
   reducers: {},
+    
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
+    });
+    builder.addCase(fetchMovie.fulfilled, (state, action) => {
+      state.oneMovie = action.payload;
     });
   },
 });

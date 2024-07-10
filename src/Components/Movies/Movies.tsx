@@ -1,16 +1,20 @@
 import { Typeofresults } from "../../store/slices/moviesSlices";
+import { NavLink } from "react-router-dom";
 import st from "./Movies.module.css";
-const imageURL = "https://image.tmdb.org/t/p/w500/";
+export const imageURL = "https://image.tmdb.org/t/p/w500/";
 interface TypeofMoviesFromHome {
   movies: Typeofresults;
 }
+
 const Movies = ({ movies }: TypeofMoviesFromHome) => {
   return (
     <div className={st.movies}>
       <img src={imageURL + movies.backdrop_path} alt="" />
 
       <div className={st.title}>
-        <h3>{movies.title}</h3>
+        <NavLink to={`/${movies.id}`}>
+          <h3>{movies.title}</h3>
+        </NavLink>
       </div>
     </div>
   );
