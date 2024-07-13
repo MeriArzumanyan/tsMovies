@@ -9,7 +9,7 @@ export interface Typeofresults {
   original_language: string;
   original_title: string;
   overview: string;
-  popularity: 5416.001;
+  popularity: number;
   poster_path: string;
   release_date: string;
   title: string;
@@ -22,7 +22,6 @@ export interface Typeofmovies {
   results: Typeofresults[];
   total_pages: number;
   total_results: number;
-  oneMovie: {};
 }
 export interface Typeofmoviesresult {
   page: number;
@@ -30,11 +29,20 @@ export interface Typeofmoviesresult {
   total_pages: number;
   total_results: number;
   oneMovie: Typeofresults | null;
+  text: string;
+  searchArray: Typeofresults[];
+  filterGenre: Typeofresults[];
 }
 export const fetchMovies: any = createAsyncThunk<Typeofresults[]>(
   "fetchMovies",
-  async () => {
-    const res: AxiosResponse<Typeofmovies> = await MovieAPI.getMovies();
+  async (page: any, { dispatch }) => {
+    const res: AxiosResponse<Typeofmovies> = await MovieAPI.getMovies(page);
+    dispatch(
+      total({
+        totalResults: res.data.total_results,
+        totalPages: res.data.total_pages,
+      })
+    );
     return res.data.results;
   }
 );
@@ -46,18 +54,47 @@ export const fetchMovie: any = createAsyncThunk(
   }
 );
 
+export const fetchSearch: any = createAsyncThunk<Typeofresults[], string>(
+  "moviesSlices/fetchSearch",
+  async (text) => {
+    const res: AxiosResponse<Typeofmovies> = await MovieAPI.getSearch(text);
+    return res.data.results;
+  }
+);
+export const fetchFilter: any = createAsyncThunk<Typeofresults[], { genreId: string, page: number }>(
+  "fetchFilter",
+  async ({ genreId, page }) => {
+    const res: AxiosResponse<Typeofmovies> = await MovieAPI.filterGenres(genreId, page);
+    return res.data.results;
+  }
+);
+
 const initialState: Typeofmoviesresult = {
   movies: [],
   page: 1,
   total_pages: 0,
   total_results: 0,
   oneMovie: null,
+  text: "",
+  searchArray: [],
+  filterGenre: [],
 };
-const moviesSlices = createSlice({
+export const moviesSlices = createSlice({
   name: "moviesSlices",
   initialState,
-  reducers: {},
-    
+  reducers: {
+    total(state, action) {
+      state.total_pages = action.payload.totalPages;
+      state.total_results = action.payload.totalResults;
+    },
+    changePage(state, action) {
+      state.page = action.payload;
+    },
+    changeText(state, acttion) {
+      state.text = acttion.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
@@ -65,6 +102,13 @@ const moviesSlices = createSlice({
     builder.addCase(fetchMovie.fulfilled, (state, action) => {
       state.oneMovie = action.payload;
     });
+    builder.addCase(fetchSearch.fulfilled, (state, action) => {
+      state.searchArray = action.payload;
+    });
+    builder.addCase(fetchFilter.fulfilled, (state, action) => {
+      state.filterGenre = action.payload;
+    });
   },
 });
 export default moviesSlices.reducer;
+export const { total, changePage, changeText } = moviesSlices.actions;

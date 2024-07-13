@@ -18,15 +18,14 @@ const Unique = () => {
       <div className={st.movie}>
         <img src={imageURL + oneMovie?.backdrop_path} alt="" />
         <div className={st.title}>
-        <h3>{oneMovie?.title}</h3>
+          <h3>{oneMovie?.title}</h3>
         </div>
-        
       </div>
       <div className={st.about}>
-      <h4>Description</h4>
-      <p>{oneMovie?.overview}</p>
+        <h4>Description</h4>
+        <h5>Release Date: {oneMovie?.release_date}</h5>
+        <p>{oneMovie?.overview}</p>
       </div>
-    
     </div>
   );
 };

@@ -33,3 +33,10 @@ h3:hover {
 .about{
     width: 50%;
 }
+h5{
+  padding: 20px 0 10px 0;
+  font-size: 20px;
+}
+h4{
+  font-size: 30px;
+}

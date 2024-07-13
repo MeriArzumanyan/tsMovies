@@ -8,7 +8,7 @@ export const MovieAPI = {
   getGenres() {
     return instance.get(`/genre/movie/list?api_key=${apiKey}&language=en-US`);
   },
-  getMovies(pageCount=1) {
+  getMovies(pageCount: number) {
     return instance.get(
       `/discover/movie?api_key=${apiKey}&language=en-US&page=${pageCount}`
     );
@@ -16,8 +16,14 @@ export const MovieAPI = {
   getOneMovie(id: string) {
     return instance.get(`/movie/${id}?api_key=${apiKey}&language=en-US`);
   },
-//   
-
+  getSearch(text: string) {
+    return instance.get(`search/movie?api_key=${apiKey}&query=${text}`);
+  },
+  filterGenres(genreId: string,nameGenre:number) {
+    return instance.get(
+      `/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genreId}&page=${nameGenre}`
+    );
+  },
 };
 
 // const apiKey = "f36f23edf6e10fd2ddcf939916b1f67a"

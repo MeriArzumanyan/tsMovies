@@ -9,7 +9,7 @@ interface TypeofMoviesFromHome {
 const Movies = ({ movies }: TypeofMoviesFromHome) => {
   return (
     <div className={st.movies}>
-      <img src={imageURL + movies.backdrop_path} alt="" />
+      <img src={imageURL + movies.backdrop_path} alt={movies.title} />
 
       <div className={st.title}>
         <NavLink to={`/${movies.id}`}>

@@ -1,9 +1,10 @@
+
 .home{
     padding-top: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 h3{
@@ -20,4 +21,12 @@ a{
 .main{
     display: flex;
     flex-direction: column;
+}
+.btn{
+    padding-top: 60px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

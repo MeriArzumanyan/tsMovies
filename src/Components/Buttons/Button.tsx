@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/forHooks";
 import { changePage } from "../../store/slices/moviesSlices";
-const Button = () => {
+import st from "./Button.module.css";
+export const Button = () => {
   const { total_results } = useAppSelector((state) => state.moviesSlices);
   const dispatch = useAppDispatch();
   let diapason = 10;
@@ -38,13 +39,12 @@ const Button = () => {
         </button>
       )}
       {buttons
-        .filter(
-          (movie) => movie >= leftNumber && movie <= rightPortionPageNumber
-        )
-        .map((el) => {
+        .filter((el) => el >= leftNumber && el <= rightPortionPageNumber)
+        .map((el, index) => {
           return (
             <button
-              className={el === active ? "a" : ""}
+              key={index}
+              className={el === active ? st.active : ""}
               onClick={() => changeCurentPage(el)}
             >
               {el}
